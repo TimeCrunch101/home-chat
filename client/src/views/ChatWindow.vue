@@ -2,6 +2,20 @@
 import { ref } from "vue"
 import ChatBubble from '../components/ChatBubble.vue';
 import ChatInput from '../components/ChatInput.vue';
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:3000");
+
+const sendMsg = (chat) => {
+    socket.emit("send-msg", chat)
+}
+
+socket.on("server-send-msg", (data) => {
+    chats.value.push({
+        string: data,
+        isSelf: false
+    })
+})
 
 const chats = ref([])
 
@@ -10,6 +24,7 @@ const pushMessage = (chat) =>{
         string: chat.chat,
         isSelf: true
     })
+    sendMsg(chat.chat)
 }
 
 
