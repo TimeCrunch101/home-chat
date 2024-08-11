@@ -1,9 +1,14 @@
 const express = require("express")
 const app = express()
+const initGetRouter = require("./router/getRouter")
+initGetRouter(app)
+const {spawn} = require("child_process")
 
-app.get("/", (req, res) => {
-    res.sendStatus(200)
-    console.log("Got a request")
+const wsServer = spawn("node",["./socket.js"])
+
+wsServer.stdout.on("data", (data) => {
+  console.log(data.toString())
 })
 
-app.listen(8080, console.log('API: http://localhost:8080'))
+
+app.listen(8080, console.log("API: http://localhost:8080"))
