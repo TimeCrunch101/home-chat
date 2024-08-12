@@ -17,6 +17,7 @@ module.exports = {
   ],
   packagerConfig: {
     asar: true,
+    icon: "./assets/icon.ico",
     executableName: 'home-chat'
   },
   rebuildConfig: {},
