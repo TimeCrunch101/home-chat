@@ -3,8 +3,10 @@ import { ref } from "vue"
 import ChatBubble from '../components/ChatBubble.vue';
 import ChatInput from '../components/ChatInput.vue';
 import { io } from "socket.io-client";
+import SetName from "../components/SetName.vue";
 
 const socket = io("http://localhost:3000");
+const username = ref("Guest")
 const chats = ref([])
 const connectedRoom = ref("")
 const room = ref({
@@ -13,23 +15,27 @@ const room = ref({
 
 socket.on("room-emit", (data) => {
     chats.value.push({
-        string: data,
-        isSelf: false
+        string: data.msg,
+        isSelf: false,
+        username: data.username
     })
 })
 
 const sendMsg = (chat) => {
     socket.emit("room-msg", {
         msg: chat,
-        room: connectedRoom.value
+        room: connectedRoom.value,
+        username: username.value
     })
 }
 
 const pushMessage = (chat) =>{
     chats.value.push({
         string: chat.chat,
-        isSelf: true
+        isSelf: true,
+        username: username.value
     })
+    console.log(username.value)
     sendMsg(chat.chat)
 }
 
@@ -40,6 +46,10 @@ const joinRoom = () => {
     socket.emit("join-room", room.value.roomName)
 }
 
+const setName = (name) => {
+    username.value = name
+}
+
 </script>
 
 <template>
@@ -47,9 +57,10 @@ const joinRoom = () => {
         <input type="text" v-model="room.roomName">
         <button type="submit">Join room</button>
     </form>
+    <SetName @save-name="setName"/>
     <div class="chats-container">
         <div v-for="data in chats">
-            <ChatBubble :chatValue="data.string" :isSelf="data.isSelf"/>
+            <ChatBubble :chatValue="data.string" :isSelf="data.isSelf" :username="data.username"/>
         </div>
     </div>
     <ChatInput @send-message="pushMessage"/>

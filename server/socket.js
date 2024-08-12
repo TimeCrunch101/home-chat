@@ -27,7 +27,8 @@ io.on("connection", (socket) => {
   })
 
   socket.on("room-msg", (msgData) => {
-    socket.to(msgData.room).emit("room-emit",msgData.msg)
+    console.log(msgData)
+    socket.to(msgData.room).emit("room-emit",msgData)
   })
   
 });

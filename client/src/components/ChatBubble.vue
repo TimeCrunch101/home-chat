@@ -3,6 +3,7 @@
 const props = defineProps({
     chatValue: String,
     isSelf: Boolean,
+    username: String,
 })
 
 </script>
@@ -10,17 +11,30 @@ const props = defineProps({
 <template>
     <div id="test" class="chat-container">    
         <div class="chat-bubble" :class="{ 'chat-bubble-self': isSelf }">
+            <p :class="{'username-self': isSelf, 'username-other': !isSelf}">{{ username }}</p>
             <p class="chat" :class="{'chat-self': isSelf, 'chat-other': !isSelf}">{{ chatValue }}</p>
         </div>
     </div>
 </template>
 
 <style scoped>
+.username-self {
+    position: relative;
+    left: 45px;
+    bottom: 20px
+}
+
+.username-other {
+    position: relative;
+    left: 38px;
+    bottom: 20px
+}
+
 .chat {
+    word-wrap: break-word;
     border-radius: 1em;
-    width: max-content;
     padding: .5em;
-    max-width: 600px;
+    max-width: 400px;
 }
 
 .chat-self {
