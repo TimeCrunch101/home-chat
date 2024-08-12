@@ -17,7 +17,6 @@ module.exports = {
   ],
   packagerConfig: {
     asar: true,
-    // icon: "./assets/icon.ico"
     executableName: 'home-chat'
   },
   rebuildConfig: {},
@@ -30,7 +29,7 @@ module.exports = {
         setupIcon: "./assets/icon.ico",
         name: "aaronAllen.homeChat",
         setupExe: "home-chat-setup.exe",
-        exe: "Home Chat.exe",
+        exe: "home-chat.exe",
       },
     },
     {
