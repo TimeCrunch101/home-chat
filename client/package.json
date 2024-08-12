@@ -1,8 +1,8 @@
 {
   "name": "home-chat",
-  "productName": "home-chat",
-  "version": "1.0.0",
-  "description": "My Electron application description",
+  "productName": "Home Chat",
+  "version": "0.0.1",
+  "description": "A real time chat application for home use.",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -10,6 +10,10 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimeCrunch101/home-chat.git"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.4.0",
@@ -20,17 +24,23 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron-forge/plugin-vite": "^7.4.0",
+    "@electron-forge/publisher-github": "^7.4.0",
     "@electron/fuses": "^1.8.0",
     "@vitejs/plugin-vue": "^5.1.2",
     "electron": "31.3.1",
     "vite": "^5.4.0"
   },
-  "keywords": [],
+  "keywords": [
+    "Electron"
+  ],
   "author": {
     "name": "Aaron Allen",
     "email": "91556430+TimeCrunch101@users.noreply.github.com"
   },
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TimeCrunch101/home-chat/issues"
+  },
   "dependencies": {
     "axios": "^1.7.3",
     "bootstrap": "^5.3.3",
@@ -38,6 +48,7 @@
     "electron-squirrel-startup": "^1.0.1",
     "pinia": "^2.2.1",
     "socket.io-client": "^4.7.5",
+    "update-electron-app": "^3.0.0",
     "vue": "^3.4.37",
     "vue-router": "^4.4.3"
   }

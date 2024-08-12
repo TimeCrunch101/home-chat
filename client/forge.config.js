@@ -2,14 +2,35 @@ const { FusesPlugin } = require('@electron-forge/plugin-fuses');
 const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
 module.exports = {
+  publishers: [
+    {
+      name: '@electron-forge/publisher-github',
+      config: {
+        repository: {
+          owner: 'TimeCrunch101',
+          name: 'home-chat'
+        },
+        prerelease: false,
+        draft: true
+      }
+    }
+  ],
   packagerConfig: {
     asar: true,
+    icon: "./assets/icon.ico"
   },
   rebuildConfig: {},
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        // loadingGif: "./install.gif",
+        iconUrl: "https://raw.githubusercontent.com/TimeCrunch101/home-chat/main/client/assets/icon.ico",
+        setupIcon: "./assets/icon.ico",
+        name: "aaronAllen.homeChat",
+        setupExe: "home-chat-setup.exe",
+        exe: "Home Chat.exe",
+      },
     },
     {
       name: '@electron-forge/maker-zip',
