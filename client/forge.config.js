@@ -17,7 +17,8 @@ module.exports = {
   ],
   packagerConfig: {
     asar: true,
-    icon: "./assets/icon.ico"
+    // icon: "./assets/icon.ico"
+    executableName: 'home-chat'
   },
   rebuildConfig: {},
   makers: [
@@ -38,11 +39,17 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-deb',
-      config: {},
+      config: {
+        genericName: "Home Chat",
+        icon: "./assets/icon.png"
+      },
     },
     {
       name: '@electron-forge/maker-rpm',
-      config: {},
+      config: {
+        genericName: "Home Chat",
+        icon: "./assets/icon.png"
+      },
     },
   ],
   plugins: [
