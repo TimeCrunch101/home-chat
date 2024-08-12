@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "main": "./main.js",
   "scripts": {
-    "api": "nodemon ./main.js"
+    "api": "nodemon ./main.js",
+    "socket": "nodemon ./socket.js"
   },
   "author": "Aaron Allen",
   "license": "MIT",
