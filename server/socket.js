@@ -17,7 +17,13 @@ io.on("connection", (socket) => {
   })
 
   socket.on("join-room", (roomNum) => {    
+    socket.rooms.forEach(room => {
+      if (room !== socket.id) {
+        socket.leave(room)
+      }
+    });
     socket.join(roomNum)
+    console.log("Rooms: ", socket.rooms)
   })
 
   socket.on("room-msg", (msgData) => {
