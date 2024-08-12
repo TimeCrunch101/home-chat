@@ -10,5 +10,7 @@ wsServer.stdout.on("data", (data) => {
   console.log(data.toString())
 })
 
+// TODO: Listen for socket server errors
+
 
 app.listen(8080, console.log("API: http://localhost:8080"))
