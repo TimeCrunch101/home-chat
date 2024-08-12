@@ -6,8 +6,6 @@ const {spawn} = require("child_process")
 
 const wsServer = spawn("node",["./socket.js"])
 
-console.log(process.env.NODE_ENV)
-
 wsServer.stdout.on("data", (data) => {
   console.log(data.toString())
 })
