@@ -53,6 +53,10 @@ app.whenReady().then(() => {
       label: 'Quit',
       click: () => {handleQuit()}
     },
+    { 
+      label: 'Show Window',
+      click: () => {createWindow()}
+    },
   ])
 
   tray.setToolTip('Home Chat')
