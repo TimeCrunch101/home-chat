@@ -4,9 +4,8 @@
 name: Build/Publish - Staging
 
 on:
-  push:
-    branches: [ "staging" ]
-
+  pull_request:
+    branches: [ "main" ]
 jobs:
   release:
     runs-on: ${{ matrix.os }}
@@ -16,7 +15,7 @@ jobs:
         node-version: [22.x]
         OS: [macos-latest, ubuntu-latest, windows-latest]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+    environment: staging
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}

@@ -4,7 +4,7 @@
 name: Deploy Server
 
 on:
-  pull_request:
+  push:
     branches: [ "main" ]
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
       matrix:
         node-version: [22.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+    environment: production
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
