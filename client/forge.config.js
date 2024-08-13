@@ -26,7 +26,7 @@ module.exports = {
       name: '@electron-forge/maker-squirrel',
       config: {
         // loadingGif: "./install.gif",
-        iconUrl: "https://raw.githubusercontent.com/TimeCrunch101/home-chat/main/client/assets/icon.ico",
+        iconUrl: "https://raw.githubusercontent.com/TimeCrunch101/home-chat/main/client/public/icon.ico",
         setupIcon: "./public/icon.ico",
         name: "aaronAllen.homeChat",
         setupExe: "home-chat-setup.exe",
@@ -41,14 +41,14 @@ module.exports = {
       name: '@electron-forge/maker-deb',
       config: {
         genericName: "Home Chat",
-        icon: "./assets/icon.png"
+        icon: "./public/icon.png"
       },
     },
     {
       name: '@electron-forge/maker-rpm',
       config: {
         genericName: "Home Chat",
-        icon: "./assets/icon.png"
+        icon: "./public/icon.png"
       },
     },
   ],
