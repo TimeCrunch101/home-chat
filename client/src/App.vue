@@ -7,6 +7,6 @@ router.push('/')
 </script>
 
 <template>
-    <p>Version: 0.0.2</p>
+    <p>Version: 0.0.4</p>
     <RouterView />
 </template>
