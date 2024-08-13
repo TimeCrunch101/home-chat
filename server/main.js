@@ -5,6 +5,7 @@ initGetRouter(app)
 const {spawn} = require("child_process")
 
 if (process.env.NODE_ENV === "production") {
+  console.info("PRODUCTION ENV")
   const wsServer = spawn("node",["./socket.js"])
   
   wsServer.stdout.on("data", (data) => {
@@ -21,5 +22,5 @@ if (process.env.NODE_ENV === "production") {
   
   app.listen(8080, console.log("API: http://localhost:8080"))
 } else {
-  console.log("DEV")
+  console.info("DEVELOPMENT ENV")
 }
