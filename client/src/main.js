@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Tray, Menu, nativeImage } = require('electron');
 const path = require('node:path');
 const { updateElectronApp } = require('update-electron-app')
 
@@ -12,7 +12,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: path.join(__dirname + "../assets/icon.ico"),
+    icon: "./public/icon.ico",
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
@@ -24,14 +24,42 @@ const createWindow = () => {
     mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
   }
 
-  // Open the DevTools.
   if (!app.isPackaged) {
     mainWindow.webContents.openDevTools();
   }
+  
+  mainWindow.on("close", (event) => {
+    // mainWindow.close()
+  })
 };
 
+const handleQuit = () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+}
+
+let tray
 app.whenReady().then(() => {
+
   createWindow();
+
+  const icon = nativeImage.createFromPath(path.join(__dirname,"icon.png"))
+
+  tray = new Tray(icon)
+
+  const contextMenu = Menu.buildFromTemplate([
+    { 
+      label: 'Quit',
+      click: () => {handleQuit()}
+    },
+  ])
+
+  tray.setToolTip('Home Chat')
+  tray.setTitle('Home Chat')
+  tray.setContextMenu(contextMenu)
+  tray.addListener("click", () => createWindow())
+
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
@@ -40,9 +68,9 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  // if (process.platform !== 'darwin') {
+  //   app.quit();
+  // }
 });
 
 updateElectronApp()

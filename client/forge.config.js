@@ -17,7 +17,7 @@ module.exports = {
   ],
   packagerConfig: {
     asar: true,
-    icon: "./assets/icon.ico",
+    icon: "./public/icon.ico",
     executableName: 'home-chat'
   },
   rebuildConfig: {},
@@ -27,7 +27,7 @@ module.exports = {
       config: {
         // loadingGif: "./install.gif",
         iconUrl: "https://raw.githubusercontent.com/TimeCrunch101/home-chat/main/client/assets/icon.ico",
-        setupIcon: "./assets/icon.ico",
+        setupIcon: "./public/icon.ico",
         name: "aaronAllen.homeChat",
         setupExe: "home-chat-setup.exe",
         exe: "home-chat.exe",
