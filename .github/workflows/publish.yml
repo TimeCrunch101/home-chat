@@ -27,5 +27,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: 'client/package-lock.json'
-        github_token: ${{ secrets.github_token }}
     - run: cd client && npm ci && npm run publish
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
