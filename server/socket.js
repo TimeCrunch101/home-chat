@@ -9,10 +9,8 @@ const io = new Server({
 });
 
 io.on("connection", (socket) => {
-  console.log("User Connected: ", socket.id)
 
   socket.on("send-msg", (data) => {
-    console.log(`Server got msg: ${data}`)
     socket.broadcast.emit("server-send-msg", data)
   })
 
@@ -23,11 +21,9 @@ io.on("connection", (socket) => {
       }
     });
     socket.join(roomNum)
-    console.log("Rooms: ", socket.rooms)
   })
 
   socket.on("room-msg", (msgData) => {
-    console.log(msgData)
     socket.to(msgData.room).emit("room-emit",msgData)
   })
   

@@ -1,11 +1,12 @@
+if (process.env.NODE_ENV !== "production") require('dotenv').config()
 const express = require("express")
 const app = express()
 const initGetRouter = require("./router/getRouter")
 initGetRouter(app)
 const {spawn} = require("child_process")
 
-if (process.env.NODE_ENV === "production") {
-  console.info("PRODUCTION ENV")
+if (process.env.NODE_ENV === "production" || process.env.NODE_ENV === "dev") {
+  console.info(`${process.env.NODE_ENV} ENV`)
   const wsServer = spawn("node",["./socket.js"])
   
   wsServer.stdout.on("data", (data) => {

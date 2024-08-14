@@ -20,6 +20,7 @@ socket.on("room-emit", (data) => {
         isSelf: false,
         username: data.username
     })
+    sendNotification(data.username, data.msg)
 })
 
 const sendMsg = (chat) => {
@@ -36,19 +37,21 @@ const pushMessage = (chat) =>{
         isSelf: true,
         username: username.value
     })
-    console.log(username.value)
     sendMsg(chat.chat)
 }
 
 
 const joinRoom = () => {
-    console.log("Join Room: ",room.value.roomName)
     connectedRoom.value = room.value.roomName
     socket.emit("join-room", room.value.roomName)
 }
 
 const setName = (name) => {
     username.value = name
+}
+
+const sendNotification = async (title, body) => {
+    await window.versions.notify(title, body)
 }
 
 </script>
