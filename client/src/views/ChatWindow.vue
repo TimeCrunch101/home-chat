@@ -21,6 +21,7 @@ socket.on("room-emit", (data) => {
         username: data.username
     })
     sendNotification(data.username, data.msg)
+    window.scrollTo(0, document.body.scrollHeight+50)
 })
 
 const sendMsg = (chat) => {
@@ -29,6 +30,7 @@ const sendMsg = (chat) => {
         room: connectedRoom.value,
         username: username.value
     })
+    window.scrollTo(0, document.body.scrollHeight+50)
 }
 
 const pushMessage = (chat) =>{
@@ -67,14 +69,16 @@ const sendNotification = async (title, body) => {
             <ChatBubble :chatValue="data.string" :isSelf="data.isSelf" :username="data.username"/>
         </div>
     </div>
-    <ChatInput @send-message="pushMessage"/>
+    <div>
+        <ChatInput @send-message="pushMessage"/>
+    </div>
 </template>
 
 <style scoped>
 .chats-container {
     max-width: 70%;
     margin: auto;
-    margin-bottom: 4em;
+    margin-bottom: 10em;
 }
 
 </style>
