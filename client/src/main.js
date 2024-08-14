@@ -1,15 +1,29 @@
-const { app, BrowserWindow, Tray, Menu, nativeImage } = require('electron');
+const { app, BrowserWindow, Tray, Menu, nativeImage, Notification, ipcMain } = require('electron');
 const path = require('node:path');
 const { updateElectronApp } = require('update-electron-app')
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
+let mainWindow = null
+let closeApp = null
+let tray = null
+const gotTheLock = app.requestSingleInstanceLock()
+
+if (!gotTheLock) {
+  app.quit()
+} else {
+  app.on('second-instance', (event, commandLine, workingDirectory, additionalData) => {
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore()
+      mainWindow.focus()
+    }
+  })
+}
 
 const createWindow = () => {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     icon: "./public/icon.ico",
@@ -29,7 +43,12 @@ const createWindow = () => {
   }
   
   mainWindow.on("close", (event) => {
-    // mainWindow.close()
+    if (!closeApp) {
+      event.preventDefault()
+      mainWindow.hide()
+    } else {
+      app.quit()
+    }
   })
 };
 
@@ -39,31 +58,44 @@ const handleQuit = () => {
   }
 }
 
-let tray
+const notify = (title, body) => {
+  new Notification({
+    title: title,
+    body: body
+  }).show()
+}
+
 app.whenReady().then(() => {
 
   createWindow();
 
+  ipcMain.handle("notify", (event, title, body) => {
+    if (!mainWindow.isFocused()) {
+      notify(title, body)
+    }
+  })
+  
   const icon = nativeImage.createFromPath(path.join(__dirname,"icon.png"))
-
   tray = new Tray(icon)
-
   const contextMenu = Menu.buildFromTemplate([
     { 
       label: 'Quit',
-      click: () => {handleQuit()}
+      click: () => {
+        closeApp = true
+        handleQuit()
+      }
     },
     { 
       label: 'Show Window',
-      click: () => {createWindow()}
+      click: () => {
+        mainWindow.show()
+      }
     },
   ])
-
   tray.setToolTip('Home Chat')
   tray.setTitle('Home Chat')
   tray.setContextMenu(contextMenu)
-  tray.addListener("click", () => createWindow())
-
+  tray.addListener("click", () => mainWindow.show())
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
@@ -72,9 +104,9 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
-  // if (process.platform !== 'darwin') {
-  //   app.quit();
-  // }
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
 });
 
 updateElectronApp()
