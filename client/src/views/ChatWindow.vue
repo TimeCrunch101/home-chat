@@ -5,8 +5,8 @@ import ChatInput from '../components/ChatInput.vue';
 import { io } from "socket.io-client";
 import SetName from "../components/SetName.vue";
 
-const socket = io("https://ws.cincitechlabs.com");
-// const socket = io("http://localhost:3000");
+// const socket = io("https://ws.cincitechlabs.com");
+const socket = io("http://localhost:3000");
 const username = ref("Guest")
 const chats = ref([])
 const connectedRoom = ref("")
