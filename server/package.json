@@ -4,7 +4,7 @@
   "main": "./main.js",
   "scripts": {
     "api": "nodemon ./main.js",
-    "socket": "nodemon ./socket.js"
+    "socket": "nodemon ./socketServer/socket.js"
   },
   "author": "Aaron Allen",
   "license": "MIT",

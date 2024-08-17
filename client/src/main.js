@@ -2,24 +2,27 @@ const { app, BrowserWindow, Tray, Menu, nativeImage, Notification, ipcMain } = r
 const path = require('node:path');
 const { updateElectronApp } = require('update-electron-app')
 
-if (require('electron-squirrel-startup')) {
-  app.quit();
-}
 
 let mainWindow = null
 let closeApp = null
 let tray = null
-const gotTheLock = app.requestSingleInstanceLock()
 
-if (!gotTheLock) {
-  app.quit()
-} else {
-  app.on('second-instance', (event, commandLine, workingDirectory, additionalData) => {
-    if (mainWindow) {
-      if (mainWindow.isMinimized()) mainWindow.restore()
-      mainWindow.focus()
-    }
-  })
+if (process.env.NODE_ENV !== 'development') {
+  console.log(process.env.NODE_ENV)
+  if (require('electron-squirrel-startup')) {
+    app.quit();
+  }
+  const gotTheLock = app.requestSingleInstanceLock()
+  if (!gotTheLock) {
+    app.quit()
+  } else {
+    app.on('second-instance', (event, commandLine, workingDirectory, additionalData) => {
+      if (mainWindow) {
+        if (mainWindow.isMinimized()) mainWindow.restore()
+        mainWindow.focus()
+      }
+    })
+  }
 }
 
 const createWindow = () => {

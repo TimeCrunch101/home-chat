@@ -17,5 +17,5 @@ const DB = mysql2.createPool({
 });
 
 module.exports = {
-  DB: DB
+  DB
 }
