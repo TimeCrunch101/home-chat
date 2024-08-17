@@ -77,6 +77,15 @@ socket.on("user connected", (user) => {
     users.value.push(user)
 })
 
+socket.on("user disconnected", (userID) => {
+    for (let i = 0; i < users.value.length; i++) {
+        const user = users.value[i];
+        if (userID === user.userID) {
+            users.value.splice(i, 1)
+        }
+    }
+})
+
 </script>
 
 <template>

@@ -19,8 +19,11 @@ io.use((socket, next) => {
 
 io.on("connection", (socket) => {
   
-  // TODO: Log in server when a user connects, use process.send() in production
-  console.log(`Socket ID: ${socket.id}, Username: ${socket.username} - Connected`)
+  process.send({
+    event: "log message",
+    message: `Socket ID: ${socket.id}, Username: ${socket.username} - Connected`,
+    log_level: "info"
+  })
 
 
   const users = [];
@@ -48,8 +51,11 @@ io.on("connection", (socket) => {
       }
     });
     socket.join(roomNum)
-    // TODO: Log in server, use process.send() in production
-    console.log(`Socket ID: ${socket.id}, Username: ${socket.username} Joined Room: ${roomNum}`)
+    process.send({
+      event: "log message",
+      message: `Socket ID: ${socket.id}, Username: ${socket.username} Joined Room: ${roomNum}`,
+      log_level: "info"
+    })
   })
 
   socket.on("room-msg", (msgData) => {
@@ -57,12 +63,16 @@ io.on("connection", (socket) => {
   })
 
   socket.on("disconnect", (reason) => {
-    // TODO: Log in server, use process.send() in production
-    console.log(`UserID: ${socket.id}, UserName: ${socket.username}, Disconnected Because: ${reason}`)
+    socket.broadcast.emit("user disconnected", (socket.id))
+    process.send({
+      event: "log message",
+      message: `UserID: ${socket.id}, UserName: ${socket.username}, Disconnected Because: ${reason}`,
+      log_level: "info"
+    })
   })
   
 });
 
 
 io.listen(3000);
-// FIXME: use process.send() in production
+process.send("WS: http://localhost:3000")

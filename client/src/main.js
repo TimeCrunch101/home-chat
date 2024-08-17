@@ -8,7 +8,7 @@ let closeApp = null
 let tray = null
 
 if (process.env.NODE_ENV !== 'development') {
-  console.log(process.env.NODE_ENV)
+  console.log("ENVIRONMENT: ",process.env.NODE_ENV)
   if (require('electron-squirrel-startup')) {
     app.quit();
   }

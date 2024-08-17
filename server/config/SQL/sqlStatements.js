@@ -1,7 +1,8 @@
-exports.error_logs = `
-CREATE TABLE IF NOT EXISTS \`home_chat\`.\`error_logs\` (
-  \`error_logs\` INT NOT NULL AUTO_INCREMENT,
-  \`message\` MEDIUMTEXT NULL,
-  \`time\` VARCHAR(45) NULL,
-  PRIMARY KEY (\`error_logs\`));
+exports.logs_table = `
+CREATE TABLE IF NOT EXISTS \`home_chat\`.\`logs\` (
+  \`log_id\` INT NOT NULL AUTO_INCREMENT,
+  \`message\` MEDIUMTEXT NOT NULL,
+  \`time\` VARCHAR(45) NOT NULL,
+  \`log_level\` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (\`log_id\`));
 `
