@@ -1,5 +1,5 @@
-console.info(process.env.NODE_ENV)
 if (process.env.NODE_ENV !== "production") require('dotenv').config()
+console.info(process.env.NODE_ENV)
 const express = require("express")
 const app = express()
 require("./controllers/socketController")
