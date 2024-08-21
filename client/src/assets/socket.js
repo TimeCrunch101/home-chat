@@ -12,7 +12,7 @@ const socket = io(server, {autoConnect: false});
 
 if (process.env.NODE_ENV === "development") {
     socket.onAny((event, ...args) => {
-        console.info("Some Event Occurred: ", event, args);
+        console.info("DEV: Event: ", event, args);
       });
 }
 

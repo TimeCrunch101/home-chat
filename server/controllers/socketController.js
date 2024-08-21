@@ -7,6 +7,7 @@ const wsServer = spawn("node",["./socketServer/socket.js"], {
   })
 
 wsServer.on("message", (data) => {
+  console.log(data)
   switch (data.event) {
     case "log message":
       dbController.logSocketEvent(data)

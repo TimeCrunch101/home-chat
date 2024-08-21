@@ -4,6 +4,7 @@ import ChatBubble from '../components/ChatBubble.vue';
 import ChatInput from '../components/ChatInput.vue';
 import socket from "../assets/socket"
 import SetName from "../components/SetName.vue";
+import ConnectedUsers from "../components/ConnectedUsers.vue"
 
 const username = ref("Guest")
 const users = ref([])
@@ -94,9 +95,12 @@ socket.on("user disconnected", (userID) => {
         <button type="submit">Join room</button>
     </form>
     <SetName @save-name="setName" />
-    <div>
-        <p v-for="user in users">{{ user.username }}</p>
-    </div>
+
+
+    <ConnectedUsers/>
+    <!-- <p v-for="user in users">{{ user.username }}</p> -->
+
+
     <div class="chats-container">
         <div v-for="data in chats">
             <ChatBubble :chatValue="data.string" :isSelf="data.isSelf" :username="data.username" />
