@@ -7,9 +7,11 @@ const wsServer = spawn("node",["./socketServer/socket.js"], {
   })
 
 wsServer.on("message", (data) => {
-  console.log(data)
   switch (data.event) {
     case "log message":
+      if (process.env.NODE_ENV !== "development") {
+        console.log(data)
+      }
       dbController.logSocketEvent(data)
       break;
   

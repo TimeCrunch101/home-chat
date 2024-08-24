@@ -10,10 +10,10 @@ if (process.env.NODE_ENV === "development") {
 
 const socket = io(server, {autoConnect: false});
 
-if (process.env.NODE_ENV === "development") {
-    socket.onAny((event, ...args) => {
-        console.info("DEV: Event: ", event, args);
-      });
-}
+// if (process.env.NODE_ENV === "development") {
+//     socket.onAny((event, ...args) => {
+//         console.info("DEV: Event: ", event, args);
+//       });
+// }
 
 export default socket;

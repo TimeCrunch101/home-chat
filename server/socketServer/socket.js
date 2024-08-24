@@ -32,16 +32,18 @@ io.on("connection", (socket) => {
     users.push({
       userID: id,
       username: socket.username,
+      room: null
     });
   }
 
-  // Get List of Users
+  // Provide list of users to newly connected client
   socket.emit("users", users);
 
-  // Notify All Users
+  // Notify All Users when a user connects
   socket.broadcast.emit("user connected", {
     userID: socket.id,
-    username: socket.username
+    username: socket.username,
+    room: null
   })
 
   socket.on("join-room", (roomNum) => {    
@@ -58,10 +60,12 @@ io.on("connection", (socket) => {
     })
   })
 
+  // SEND MSG TO ROOM
   socket.on("room-msg", (msgData) => {
     socket.to(msgData.room).emit("room-emit",msgData)
   })
 
+  // DISCONNECT
   socket.on("disconnect", (reason) => {
     socket.broadcast.emit("user disconnected", (socket.id))
     process.send({

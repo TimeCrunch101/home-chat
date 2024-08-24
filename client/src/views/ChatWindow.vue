@@ -98,7 +98,7 @@ socket.on("user disconnected", (userID) => {
 
     <h4 style="margin-top: 1em;">Online Users</h4>
     
-    <ConnectedUsers v-for="user in users" :username="user.username"/>
+    <ConnectedUsers v-for="user in users" :username="user.username" :room="user.room"/>
     
     <div class="chats-container">
         <div v-for="data in chats">

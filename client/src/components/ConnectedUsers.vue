@@ -2,7 +2,7 @@
 
 const props = defineProps({
     username: String,
-
+    room: String
 })
 
 
@@ -13,7 +13,8 @@ const props = defineProps({
 
 <div class="online-users">
     <ul class="users-list">
-        <li class="user">{{ props.username }}</li>
+        <li v-if="props.room !== null" class="user">{{ props.username }} | In Room: {{ props.room }}</li>
+        <li v-else class="user">{{ props.username }}</li>
     </ul>
 </div>
 
