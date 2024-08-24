@@ -4,7 +4,7 @@
   "main": "./main.js",
   "scripts": {
     "api": "nodemon ./main.js",
-    "socket": "nodemon ./socket.js"
+    "socket": "nodemon ./socketServer/socket.js"
   },
   "author": "Aaron Allen",
   "license": "MIT",
@@ -12,6 +12,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2",
+    "mysql2": "^3.11.0",
     "socket.io": "^4.7.5"
   },
   "devDependencies": {

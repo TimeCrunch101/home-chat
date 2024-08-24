@@ -1,27 +1,13 @@
 if (process.env.NODE_ENV !== "production") require('dotenv').config()
+console.info(process.env.NODE_ENV)
 const express = require("express")
 const app = express()
+require("./controllers/socketController")
 const initGetRouter = require("./router/getRouter")
+const initPostRouter = require("./router/postRouter")
 initGetRouter(app)
-const {spawn} = require("child_process")
+initPostRouter(app)
 
-if (process.env.NODE_ENV === "production" || process.env.NODE_ENV === "dev") {
-  console.info(`${process.env.NODE_ENV} ENV`)
-  const wsServer = spawn("node",["./socket.js"])
-  
-  wsServer.stdout.on("data", (data) => {
-    console.log(data.toString())
-  })
-  
-  wsServer.stderr.on("data", (data) => {
-    console.error("WS Error: ", data.toString())
-  })
-  
-  wsServer.on("close", (code) => {
-    console.info("WS Process Closed: ", code)
-  })
-  
+if (process.env.NODE_ENV === "production" || process.env.NODE_ENV === "development") {
   app.listen(8080, console.log("API: http://localhost:8080"))
-} else {
-  console.info("DEVELOPMENT ENV")
 }

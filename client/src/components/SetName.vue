@@ -5,7 +5,11 @@ const username = ref('')
 const emit = defineEmits(["save-name"])
 
 const setName = () => {
-    emit('save-name', username.value)
+    if (username.value.length < 3) {
+        alert("The Username is too short...")
+    } else {
+        emit('save-name', username.value)
+    }
 }
 
 </script>
