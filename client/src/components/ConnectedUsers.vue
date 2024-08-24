@@ -1,5 +1,10 @@
 <script setup>
 
+const props = defineProps({
+    username: String,
+
+})
+
 
 
 </script>
@@ -8,8 +13,7 @@
 
 <div class="online-users">
     <ul class="users-list">
-        <li class="user">Aaron</li>
-        <li class="user">jfkdlsajfdlsa;jfkdls;afjdkl;sajfdkls;afjdklas;</li>
+        <li class="user">{{ props.username }}</li>
     </ul>
 </div>
 
@@ -18,18 +22,13 @@
 <style>
 
 .online-users {
-    border: 1px solid green;
+    margin-left: 1em;
     width: max-content;
     padding-right: 1em;
 }
 
-ul li {
-    list-style: circle;
+li::marker {
     color: green;
-}
-
-ul li span {
-    color: green
 }
 
 </style>

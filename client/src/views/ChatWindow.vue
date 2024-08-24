@@ -96,11 +96,10 @@ socket.on("user disconnected", (userID) => {
     </form>
     <SetName @save-name="setName" />
 
-
-    <ConnectedUsers/>
-    <!-- <p v-for="user in users">{{ user.username }}</p> -->
-
-
+    <h4 style="margin-top: 1em;">Online Users</h4>
+    
+    <ConnectedUsers v-for="user in users" :username="user.username"/>
+    
     <div class="chats-container">
         <div v-for="data in chats">
             <ChatBubble :chatValue="data.string" :isSelf="data.isSelf" :username="data.username" />
