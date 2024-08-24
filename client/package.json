@@ -1,7 +1,7 @@
 {
   "name": "home-chat",
   "productName": "Home Chat",
-  "version": "0.1.10",
+  "version": "0.2.11",
   "description": "A real time chat application for home use.",
   "main": ".vite/build/main.js",
   "scripts": {
