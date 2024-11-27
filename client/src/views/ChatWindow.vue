@@ -21,7 +21,7 @@ socket.on("room-emit", (data) => {
         username: data.username
     })
     sendNotification(data.username, data.msg)
-    window.scrollTo(0, document.body.scrollHeight + 50)
+    window.scrollTo(0, document.body.scrollHeight+50)
 })
 
 const sendMsg = (chat) => {
@@ -30,6 +30,7 @@ const sendMsg = (chat) => {
         room: connectedRoom.value,
         username: username.value
     })
+
     window.scrollTo(0, document.body.scrollHeight + 50)
 }
 
