@@ -21,7 +21,7 @@ socket.on("room-emit", (data) => {
         username: data.username
     })
     sendNotification(data.username, data.msg)
-    window.scrollTo(0, document.body.scrollHeight + 50)
+    window.scrollTo(0, document.body.scrollHeight+50)
 })
 
 const sendMsg = (chat) => {
@@ -30,6 +30,7 @@ const sendMsg = (chat) => {
         room: connectedRoom.value,
         username: username.value
     })
+
     window.scrollTo(0, document.body.scrollHeight + 50)
 }
 
@@ -98,7 +99,7 @@ socket.on("user disconnected", (userID) => {
 
     <h4 style="margin-top: 1em;">Online Users</h4>
     
-    <ConnectedUsers v-for="user in users" :username="user.username"/>
+    <ConnectedUsers v-for="user in users" :username="user.username" :room="user.room"/>
     
     <div class="chats-container">
         <div v-for="data in chats">
